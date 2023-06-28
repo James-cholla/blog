@@ -1,89 +1,52 @@
 <template>
-
-    <div class="parent">
-        <div id="layouts" :style="`background-image: url(${bg}); filter: blur(${load}px);`">
-
-        </div>
-
-        <main :class="`${show?'animate__slideInDown':'hidden'} animate__animated`">
-            <aside id="aside">
-                <NuxtLogo></NuxtLogo>
-                <AsideNavBar></AsideNavBar>
-                <FootNav></FootNav>
-            </aside>
-
-            <div id="main">
-                <header>
-
-                </header>
-
-                <div id="content">
-                    <nuxt />
-                </div>
-            </div>
-        </main>
-
-        <footer :class="`${show?'animate__slideInUp':'hidden'} animate__animated`" id="footer"> <FooterBar></FooterBar> </footer>
-
+    <div class="common-layout">
+        <el-container class="container">
+            <el-aside width="80px" class="aside">
+                <Logo></Logo>
+                <AsideNav></AsideNav>
+            </el-aside>
+            <el-container>
+                <el-header>Header</el-header>
+                <el-main><slot /></el-main>
+            </el-container>
+        </el-container>
+        <p class="footer">版权©</p>
     </div>
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            bg: "",
-            load: 99,
-            show: false
-        };
-    },
-    methods: {
-        blurring(imgSrc) {
-            let img = new Image();
-            img.src = imgSrc;
-            this.bg = img.src;
-            let int = setInterval(() => {
-                if (this.load == 0) {
-                    clearInterval(int);
-                    this.show = true;
-                }
-                this.load--;
-            }, 30);
-        }
-    },
-    mounted() {
-        const That = this;
-        fetch("https://api.vvhan.com/api/girl?type=json").then(Response => {
-            if (Response.ok) {
-                return Response.json();
-            }
-        }).then(res => {
-            this.blurring(res.imgurl);
-        });
-    }
-}
 
 </script>
 
 <style scoped>
-.parent {
-    height: 100vh;
-    position: relative;
+.common-layout{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
+    
+    height: 100vh;
 }
 
-.amint {
-    transition: .3s ease-in-out;
+.container{
+    width: 80%;
+    height: calc(100vh - 200px);
+    margin-top: -80px;
+    border-radius: 6px;
+    flex: none;
+    background: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.234);
 }
 
-.hidden {
-    opacity: 0;
+.footer{
+    position: absolute;
+    bottom: 40px;
+    font-size: 14px;
+    color: #b4b4b4;
 }
 
-.show {
-    opacity: 1;
+.aside{
+    border-right: 1px solid #e9e9e9;
+    overflow: inherit;
 }
 </style>

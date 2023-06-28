@@ -1,0 +1,10 @@
+<template>
+    <h1>video</h1>
+</template>
+
+<script>
+
+</script>
+
+<style>
+</style>
