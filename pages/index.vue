@@ -1,27 +1,39 @@
 <template>
     <Art :data="data"></Art>
+    <va-pagination v-model="value" :pages="5" @click="fun" />
 </template>
 
 <script>
-export default{
-    data(){
+export default {
+    data() {
         return {
-            data:[]
+            data: [],
+            value: 1
         }
     },
-    created(){
-        let api =  useRuntimeConfig().public.apiBase
-        fetch(`${api}article/all`).then(Response=>{
-            if(Response.ok){
+    methods: {
+        fun() {
+            let api = useRuntimeConfig().public.apiBase
+            fetch(`${api}article/all?limit=2&page=${this.value}`).then(Response => {
+                if (Response.ok) {
+                    return Response.json()
+                }
+            }).then(res => {
+                this.data = res.data.data
+            })
+        }
+    },
+    created() {
+        let api = useRuntimeConfig().public.apiBase
+        fetch(`${api}article/all?limit=2&page=${this.value}`).then(Response => {
+            if (Response.ok) {
                 return Response.json()
             }
-        }).then(res=>{
+        }).then(res => {
             this.data = res.data.data
         })
     }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

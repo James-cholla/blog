@@ -58,7 +58,7 @@
 
 .main {
     border-top: 1px solid #ebebeb;
-    height: 2000px;
+    min-height: calc(100vh - 200px);
 }
 
 .footer {
