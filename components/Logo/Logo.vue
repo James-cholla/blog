@@ -1,6 +1,6 @@
 <template>
 <NuxtLink to='/'>
-    <img class="w-11 mx-auto mt-8 rounded shadow-md" :src="logoSrc" alt="">
+    <img class="w-11 mx-auto rounded shadow-md" :src="logoSrc" alt="">
 </NuxtLink>
 </template>
 

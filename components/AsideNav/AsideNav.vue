@@ -1,8 +1,15 @@
 <template>
     <nav class="mx-auto flex justify-center flex-col content-center flex-wrap mt-4">
         <NuxtLink class="relative" :to="item.link" v-for="(item, index) in nav" :key="index">
-            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center " :icon="item.icon" :size="item.size" :color="item.color" :hoverColor="item.hoverColor"></Icons>
+            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center " :icon="item.icon" :size="item.size"
+                :color="item.color" :hoverColor="item.hoverColor"></Icons>
             <span class="inline-block absolute rounded-md right-12 w-14 py-0.5 text-center">{{ item.text }}</span>
+        </NuxtLink>
+
+        <NuxtLink class="relative foot top-80" v-for="(item, index) in foot" :key="index" @click="fun(index)">
+            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center" :icon="item.icon" :size="item.size"
+                :color="item.color" :hoverColor="item.hoverColor" ></Icons>
+            <span class="inline-block absolute rounded-md right-12 w-20 py-0.5 px-2 text-center">{{ item.text }}</span>
         </NuxtLink>
     </nav>
 </template>
@@ -52,24 +59,48 @@ export default {
                     size: 18,
                     hoverColor: '#FFF'
                 }
+            ],
+            foot: [
+                {   
+                    link: '/user',
+                    text: '用户中心',
+                    icon: 'person-circle',
+                    color: '#3e3e3e',
+                    size: 20,
+                    hoverColor: '#FFF'
+                },
+                {
+                    text: '返回顶部',
+                    icon: 'chevron-bar-up',
+                    color: '#3e3e3e',
+                    size: 18,
+                    hoverColor: '#FFF'
+                }
             ]
         }
     },
-    created() {
-
+    methods:{
+        fun(num){
+            if(num == 0){
+                console.log(num);
+            }else if(num == 1){
+                console.log(num);
+            }
+        }
     }
 }
 </script>
 
 <style scoped>
-.icon{
+.icon {
     line-height: 37px;
 }
-.icon:hover{
+
+.icon:hover {
     background: var(--bg-color);
 }
 
-span{
+span {
     background: var(--bg-color);
     padding-top: 4px;
     padding-bottom: 4px;
@@ -79,7 +110,9 @@ span{
     top: 1.3rem
 }
 
-.icon:hover + span{
-    display: block;
+.foot .icon{
+    cursor: pointer;
 }
-</style>
+.icon:hover+span {
+    display: block;
+}</style>
