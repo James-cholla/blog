@@ -1,6 +1,9 @@
 <template>
-    <Art :data="data"></Art>
-    <va-pagination v-model="value" :pages="5" @click="fun" />
+    <Art :data="data[value-1]" ></Art>
+
+    <div class="pages flex">
+        <NuxtLink :class="`pg ${value == index+1? 'active': ' '}`" :to="`?pages=${index+1}`" v-for="(item, index) in pages" :key="index" @click="fun(index)">{{ index+1 }}</NuxtLink>
+    </div>
 </template>
 
 <script>
@@ -8,32 +11,52 @@ export default {
     data() {
         return {
             data: [],
+            pages: 0,
             value: 1
         }
     },
     methods: {
-        fun() {
-            let api = useRuntimeConfig().public.apiBase
-            fetch(`${api}article/all?limit=2&page=${this.value}`).then(Response => {
-                if (Response.ok) {
-                    return Response.json()
-                }
-            }).then(res => {
-                this.data = res.data.data
-            })
+        fun(num){
+            this.value = num+1
+        },
+        pagesArr(argArr, len){
+            let arr = []
+            for (let index = 0; index < argArr.length; index++) {
+                arr.push(argArr.slice(this.pages, this.pages+len))
+                this.pages += 1
+            }
+            return arr
         }
     },
     created() {
+        
+    },
+    mounted(){
+      
         let api = useRuntimeConfig().public.apiBase
-        fetch(`${api}article/all?limit=2&page=${this.value}`).then(Response => {
+        fetch(`${api}article/all?page=1&limit=100`).then(Response => {
             if (Response.ok) {
                 return Response.json()
             }
         }).then(res => {
-            this.data = res.data.data
+            const d = res.data.data
+            this.data = this.pagesArr(d, 1)
+            
         })
+        const route = useRoute()
+        this.value = route.query.pages == undefined ? 1 : route.query.pages
     }
 }
 </script>
 
-<style></style>
+<style scoped>
+.pages .pg{
+    display: inline-block;
+    padding: 2px 8px;
+    background: #e9e9e9;
+}
+
+.pages .active{
+    background: #4e4e4e;
+}
+</style>

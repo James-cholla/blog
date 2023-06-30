@@ -1,7 +1,7 @@
 <template>
     <section class="flex mb-10 pl-4" v-for="(item, index) in data" :key="index">
         <article class="w-9/12">
-            <h2 class="text-xl font-black mb-4"><NuxtLink :to="`art/${item.id}`">{{ item.title }}</NuxtLink></h2>
+            <h2 class="text-xl font-black mb-4"><NuxtLink :to="`art/${item.id}?${item.opt.auth == 'password'? 'pwd=true' : ''}`">{{ item.title }}</NuxtLink></h2>
             <p class="w-11/12 text-sm tracking-wider text-slate-600 text-justify"><NuxtLink  :to="`art/${item.id}`">{{ item.description }}</NuxtLink></p>
             <div class="mt-4 text-sm" v-for="sort in item.expand['sort']"><NuxtLink :to="`art/${sort.id}`" class="font-black text-rose-700">{{ sort.name }}</NuxtLink> · {{ timeDate(item.create_time) }}</div>
         </article>
