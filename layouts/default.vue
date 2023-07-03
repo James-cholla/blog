@@ -2,19 +2,20 @@
     <div class="common-layout">
         <el-container class="container">
             <el-aside width="80px" class="aside">
-                <va-affix :offset-top="120">
+                <el-affix :offset="120">
                     <div>
                         <Logo></Logo>
                         <AsideNav></AsideNav>
                     </div>
-                </va-affix>
+                </el-affix>
             </el-aside>
             <el-container class="content">
-                <va-affix :offset-top="0">
+       
+                <el-affix :offset="0">
                     <el-header class="header">
                         <Header></Header>
                     </el-header>
-                </va-affix>
+                </el-affix>
                 <el-main class="main">
                     <slot />
                 </el-main>

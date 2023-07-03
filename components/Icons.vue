@@ -1,11 +1,11 @@
 <template>
-    <i v-if="icon" :class="`bi bi-${icon}`" :style="`--hover-color: ${hoverColor}; font-size: ${size}px; color: ${color}`"></i>
+    <i :class="`bi bi-${name}`" :style="`--icon-size:${size}; --icon-color:${color}; --hover-color: ${hoverColor}`"></i>
 </template>
 
 <script>
 export default{
     props:{
-        icon: {
+        name: {
             type: String,
             default: ''
         },
@@ -26,7 +26,13 @@ export default{
 </script>
 
 <style scoped>
-i:hover{
-    color: var(--hover-color) !important
+.bi{
+    color: var(--icon-color);
+    font-size: var(--icon-size);
+    transition: .3s ease-in-out;
+}
+
+.bi:hover{
+    color: var(--hover-color);
 }
 </style>

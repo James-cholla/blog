@@ -4,8 +4,8 @@ export default defineNuxtConfig({
   css:['bootstrap-icons/font/bootstrap-icons.min.css','assets/mian.css'],
   modules: [
     '@nuxtjs/tailwindcss',
-    '@vuestic/nuxt',
-    "@element-plus/nuxt"
+    "@element-plus/nuxt",
+    "@vuestic/nuxt"
   ],
   
 

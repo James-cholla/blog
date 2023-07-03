@@ -1,13 +1,13 @@
 <template>
     <nav class="mx-auto flex justify-center flex-col content-center flex-wrap mt-4">
         <NuxtLink class="relative" :to="item.link" v-for="(item, index) in nav" :key="index">
-            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center " :icon="item.icon" :size="item.size"
+            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center " :name="item.icon" :size="item.size"
                 :color="item.color" :hoverColor="item.hoverColor"></Icons>
             <span class="inline-block absolute rounded-md right-12 w-14 py-0.5 text-center">{{ item.text }}</span>
         </NuxtLink>
 
         <NuxtLink class="relative foot top-80" v-for="(item, index) in foot" :key="index" @click="fun(index)">
-            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center" :icon="item.icon" :size="item.size"
+            <Icons class="icon rounded-md mt-4 w-9 h-9 inline-block text-center" :name="item.icon" :size="item.size"
                 :color="item.color" :hoverColor="item.hoverColor" ></Icons>
             <span class="inline-block absolute rounded-md right-12 w-20 py-0.5 px-2 text-center">{{ item.text }}</span>
         </NuxtLink>

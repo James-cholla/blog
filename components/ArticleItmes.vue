@@ -1,5 +1,5 @@
 <template>
-   
+    <div>2</div>
 </template>
 
 <script>
@@ -10,12 +10,17 @@ export default {
         }
     },
     methods: {
-        
+       
     },
     created() {
         
+    },
+    mounted(){
+       
     }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+
+</style>

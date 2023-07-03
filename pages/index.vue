@@ -1,62 +1,69 @@
 <template>
-    <Art :data="data[value-1]" ></Art>
+    <div>
+        {{ data }}
 
-    <div class="pages flex">
-        <NuxtLink :class="`pg ${value == index+1? 'active': ' '}`" :to="`?pages=${index+1}`" v-for="(item, index) in pages" :key="index" @click="fun(index)">{{ index+1 }}</NuxtLink>
+        <div>
+            <NuxtLink :to='`?page=${index+1}`' v-for="(item,index) in pages" :key="index">{{ index+1 }}</NuxtLink>
+        </div>
     </div>
 </template>
 
 <script>
+
 export default {
     data() {
         return {
-            data: [],
+            api: '',
+            limit: 1,
+            page: 1,
+
             pages: 0,
-            value: 1
-        }
-    },
-    methods: {
-        fun(num){
-            this.value = num+1
-        },
-        pagesArr(argArr, len){
-            let arr = []
-            for (let index = 0; index < argArr.length; index++) {
-                arr.push(argArr.slice(this.pages, this.pages+len))
-                this.pages += 1
-            }
-            return arr
+            data: [],
         }
     },
     created() {
-        
-    },
-    mounted(){
-      
-        let api = useRuntimeConfig().public.apiBase
-        fetch(`${api}article/all?page=1&limit=100`).then(Response => {
+        const route = useRoute()
+        // let page = $route.query
+        // console.log($route.params.id);
+        this.api = useRuntimeConfig().public.apiBase
+        let that = this
+
+        console.log(route.params);
+
+        fetch(`${this.api}article/all?limit=${this.limit}&page=${this.page}`).then(Response => {
             if (Response.ok) {
                 return Response.json()
             }
         }).then(res => {
-            const d = res.data.data
-            this.data = this.pagesArr(d, 1)
-            
+            that.pages = res.data.page
+            that.data = res.data.data
         })
-        const route = useRoute()
-        this.value = route.query.pages == undefined ? 1 : route.query.pages
     }
 }
 </script>
 
 <style scoped>
-.pages .pg{
-    display: inline-block;
-    padding: 2px 8px;
-    background: #e9e9e9;
+.infinite-list-wrapper {
+    height: 300px;
+    text-align: center;
 }
 
-.pages .active{
-    background: #4e4e4e;
+.infinite-list-wrapper .list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.infinite-list-wrapper .list-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background: var(--el-color-danger-light-9);
+    color: var(--el-color-danger);
+}
+
+.infinite-list-wrapper .list-item+.list-item {
+    margin-top: 10px;
 }
 </style>
