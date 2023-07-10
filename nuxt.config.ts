@@ -1,20 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css:['bootstrap-icons/font/bootstrap-icons.min.css','assets/mian.css'],
   modules: [
-    '@nuxtjs/tailwindcss',
-    "@element-plus/nuxt",
-    "@vuestic/nuxt"
+    '@vexip-ui/nuxt',
+    '@nuxtjs/tailwindcss'
   ],
-  
-
-  runtimeConfig: {
-    // The private keys which are only available server-side
+  vexipUI: {
+    // Your module options
     
-    // Keys within public are also exposed client-side
-    public: {
-      apiBase: 'https://api.blog.bromel.info/api/',
-    }
   }
 })

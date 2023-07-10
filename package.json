@@ -9,16 +9,13 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@element-plus/nuxt": "^1.0.5",
     "@nuxt/devtools": "latest",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "@types/node": "^18",
-    "element-plus": "^2.3.7",
-    "nuxt": "^3.6.1"
+    "@types/node": "^18.16.19",
+    "@vexip-ui/nuxt": "^1.0.0",
+    "nuxt": "^3.6.2"
   },
   "dependencies": {
-    "@vuestic/nuxt": "^1.0.14",
-    "bootstrap-icons": "^1.10.5",
-    "vuestic-ui": "^1.7.0"
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "nuxt-swiper": "^1.1.1"
   }
 }
